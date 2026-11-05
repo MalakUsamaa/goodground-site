@@ -77,7 +77,8 @@ function fixScript(name, js) {
   return js;
 }
 
-const CONTACT_TO = 'malak@mpavida.com';
+// Web3Forms access key: messages go to malak@mpavida.com
+const FORM_KEY = '4860b84f-3ab4-49ce-8049-280ccea01396';
 function fixContact(p) {
   let js = p.script;
   const o1 = "send: () => { if (okEmail && okMsg) this.setState({ sent: true }); else this.setState({ tried: true }); },";
@@ -87,10 +88,10 @@ if (!(okEmail && okMsg)) { this.setState({ tried: true }); return; }
 if (s.sending) return;
 this.setState({ sending: true, sendErr: false });
 const label = (topics.find((t) => t[0] === s.topic) || ['', 'A question'])[1];
-fetch('https://formsubmit.co/ajax/${CONTACT_TO}', {
+fetch('https://api.web3forms.com/submit', {
 method: 'POST',
 headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-body: JSON.stringify({ name: String(s.name).trim() || 'Not given', email: String(s.email).trim(), topic: label, message: String(s.message).trim(), _subject: 'goodground: ' + label, _replyto: String(s.email).trim(), _template: 'table', _captcha: 'false', _honey: s.honey || '' })
+body: JSON.stringify({ access_key: '${FORM_KEY}', from_name: 'goodground website', subject: 'goodground: ' + label, name: String(s.name).trim() || 'Not given', email: String(s.email).trim(), replyto: String(s.email).trim(), topic: label, message: String(s.message).trim(), botcheck: s.honey || '' })
 }).then((r) => r.json().catch(() => ({})).then((d) => { if (!r.ok || d.success === false || d.success === 'false') throw new Error('send'); }))
 .then(() => this.setState({ sending: false, sent: true }))
 .catch(() => this.setState({ sending: false, sendErr: true }));
@@ -109,7 +110,7 @@ setHoney: (e) => this.setState({ honey: e.target.value }),`);
           n[2][t] = n[2][t].replace('Send message', '{{sendLabel}}');
           nodes.splice(i + 1, 0,
             ['sc-if', { value: '{{sendErr}}' }, [['p', { role: 'alert', style: 'margin: 0; font-size: 14px; color: var(--err)' }, ['Sorry, your message did not send. Please try again in a moment.']]]],
-            ['input', { type: 'text', name: '_honey', tabIndex: '-1', autocomplete: 'off', 'aria-hidden': 'true', value: '', onChange: '{{setHoney}}', style: 'position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0' }, []]);
+            ['input', { type: 'text', name: 'botcheck', tabIndex: '-1', autocomplete: 'off', 'aria-hidden': 'true', value: '', onChange: '{{setHoney}}', style: 'position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0' }, []]);
           return true;
         }
         if (walk(n[2])) return true;
