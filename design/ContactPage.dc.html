@@ -59,8 +59,9 @@ input::placeholder,textarea::placeholder{color:#A49F8E}
 <sc-if value="{{notSent}}" hint-placeholder-val="{{ true }}">
 <div style="display: flex; flex-direction: column; gap: 22px">
 <div style="display: flex; flex-direction: column; gap: 8px">
-<label for="cName" style="font-size: 15px; font-weight: 600">Your name <span style="font-weight: 400; color: var(--soft)">(optional)</span></label>
-<input id="cName" type="text" autocomplete="name" value="{{f.name}}" onChange="{{setName}}" placeholder="Malak" style="width: 100%; box-sizing: border-box; height: 56px; padding: 0 18px; border-radius: 14px; border: 1px solid rgba(var(--ink-rgb), 0.2); background: var(--card); color: var(--ink); font-family: inherit; font-size: 16px; transition: border-color 0.2s ease, box-shadow 0.2s ease">
+<label for="cName" style="font-size: 15px; font-weight: 600">Your name</label>
+<input id="cName" type="text" autocomplete="name" required aria-invalid="{{nameInvalid}}" value="{{f.name}}" onChange="{{setName}}" placeholder="Malak" style="width: 100%; box-sizing: border-box; height: 56px; padding: 0 18px; border-radius: 14px; border: 1px solid {{nameBorder}}; background: var(--card); color: var(--ink); font-family: inherit; font-size: 16px; transition: border-color 0.2s ease, box-shadow 0.2s ease">
+<sc-if value="{{nameErr}}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 14px; color: var(--err)">Please enter your name.</span></sc-if>
 </div>
 <div style="display: flex; flex-direction: column; gap: 8px">
 <label for="cEmail" style="font-size: 15px; font-weight: 600">Email</label>
@@ -155,6 +156,7 @@ this.state = { name: '', email: '', topic: 'question', message: '', tried: false
 }
 renderVals() {
 const s = this.state;
+const okName = String(s.name).trim().length >= 2;
 const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(s.email).trim());
 const okMsg = String(s.message).trim().length >= 2;
 const topics = [['question', 'A question'], ['feedback', 'Feedback'], ['mistake', 'Something looks wrong'], ['partner', 'Partnerships'], ['press', 'Press']];
@@ -165,12 +167,15 @@ setName: (e) => this.setState({ name: e.target.value }),
 setEmail: (e) => this.setState({ email: e.target.value }),
 setMessage: (e) => this.setState({ message: e.target.value }),
 topics: topics.map(([id, label]) => { const on = s.topic === id; return { label: label, checked: on ? 'true' : 'false', bg: on ? 'var(--ink)' : 'transparent', ink: on ? 'var(--oi)' : 'var(--ink)', border: on ? 'var(--ink)' : 'rgba(var(--ink-rgb), 0.2)', pick: () => this.setState({ topic: id }) }; }),
+nameErr: s.tried && !okName,
+nameInvalid: s.tried && !okName ? 'true' : 'false',
+nameBorder: s.tried && !okName ? 'var(--err)' : 'rgba(var(--ink-rgb), 0.2)',
 emailErr: s.tried && !okEmail,
 emailInvalid: s.tried && !okEmail ? 'true' : 'false',
 emailBorder: s.tried && !okEmail ? 'var(--err)' : 'rgba(var(--ink-rgb), 0.2)',
 msgErr: s.tried && !okMsg,
 msgBorder: s.tried && !okMsg ? 'var(--err)' : 'rgba(var(--ink-rgb), 0.2)',
-send: () => { if (okEmail && okMsg) this.setState({ sent: true }); else this.setState({ tried: true }); },
+send: () => { if (okName && okEmail && okMsg) this.setState({ sent: true }); else this.setState({ tried: true }); },
 sent: s.sent,
 notSent: !s.sent,
 thanksName: s.name.trim() ? ', ' + s.name.trim().split(' ')[0] : '',

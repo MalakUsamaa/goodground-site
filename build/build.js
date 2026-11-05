@@ -81,17 +81,17 @@ function fixScript(name, js) {
 const FORM_KEY = '4860b84f-3ab4-49ce-8049-280ccea01396';
 function fixContact(p) {
   let js = p.script;
-  const o1 = "send: () => { if (okEmail && okMsg) this.setState({ sent: true }); else this.setState({ tried: true }); },";
+  const o1 = "send: () => { if (okName && okEmail && okMsg) this.setState({ sent: true }); else this.setState({ tried: true }); },";
   if (!js.includes(o1)) throw new Error('contact send not found');
   js = js.replace(o1, `send: () => {
-if (!(okEmail && okMsg)) { this.setState({ tried: true }); return; }
+if (!(okName && okEmail && okMsg)) { this.setState({ tried: true }); return; }
 if (s.sending) return;
 this.setState({ sending: true, sendErr: false });
 const label = (topics.find((t) => t[0] === s.topic) || ['', 'A question'])[1];
 fetch('https://api.web3forms.com/submit', {
 method: 'POST',
 headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-body: JSON.stringify({ access_key: '${FORM_KEY}', from_name: 'goodground website', subject: 'goodground: ' + label, name: String(s.name).trim() || 'Not given', email: String(s.email).trim(), replyto: String(s.email).trim(), topic: label, message: String(s.message).trim() })
+body: JSON.stringify({ access_key: '${FORM_KEY}', from_name: 'goodground website', subject: 'goodground: ' + label, name: String(s.name).trim(), email: String(s.email).trim(), replyto: String(s.email).trim(), topic: label, message: String(s.message).trim() })
 }).then((r) => r.json().catch(() => ({})).then((d) => { if (!r.ok || d.success === false || d.success === 'false') throw new Error('send'); }))
 .then(() => this.setState({ sending: false, sent: true }))
 .catch(() => this.setState({ sending: false, sendErr: true }));
