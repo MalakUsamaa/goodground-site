@@ -77,6 +77,49 @@ function fixScript(name, js) {
   return js;
 }
 
+const CONTACT_TO = 'malak@mpavida.com';
+function fixContact(p) {
+  let js = p.script;
+  const o1 = "send: () => { if (okEmail && okMsg) this.setState({ sent: true }); else this.setState({ tried: true }); },";
+  if (!js.includes(o1)) throw new Error('contact send not found');
+  js = js.replace(o1, `send: () => {
+if (!(okEmail && okMsg)) { this.setState({ tried: true }); return; }
+if (s.sending) return;
+this.setState({ sending: true, sendErr: false });
+const label = (topics.find((t) => t[0] === s.topic) || ['', 'A question'])[1];
+fetch('https://formsubmit.co/ajax/${CONTACT_TO}', {
+method: 'POST',
+headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+body: JSON.stringify({ name: String(s.name).trim() || 'Not given', email: String(s.email).trim(), topic: label, message: String(s.message).trim(), _subject: 'goodground: ' + label, _replyto: String(s.email).trim(), _template: 'table', _captcha: 'false', _honey: s.honey || '' })
+}).then((r) => r.json().catch(() => ({})).then((d) => { if (!r.ok || d.success === false || d.success === 'false') throw new Error('send'); }))
+.then(() => this.setState({ sending: false, sent: true }))
+.catch(() => this.setState({ sending: false, sendErr: true }));
+},
+sendErr: !!s.sendErr,
+sendLabel: s.sending ? 'Sending' : 'Send message',
+setHoney: (e) => this.setState({ honey: e.target.value }),`);
+  p.script = js;
+  // button label, error line and a hidden spam trap
+  const walk = (nodes) => {
+    for (let i = 0; i < nodes.length; i++) {
+      const n = nodes[i];
+      if (Array.isArray(n)) {
+        if (n[0] === 'button' && n[1].onClick === '{{send}}') {
+          const t = n[2].findIndex((k) => typeof k === 'string' && k.includes('Send message'));
+          n[2][t] = n[2][t].replace('Send message', '{{sendLabel}}');
+          nodes.splice(i + 1, 0,
+            ['sc-if', { value: '{{sendErr}}' }, [['p', { role: 'alert', style: 'margin: 0; font-size: 14px; color: var(--err)' }, ['Sorry, your message did not send. Please try again in a moment.']]]],
+            ['input', { type: 'text', name: '_honey', tabIndex: '-1', autocomplete: 'off', 'aria-hidden': 'true', value: '', onChange: '{{setHoney}}', style: 'position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0' }, []]);
+          return true;
+        }
+        if (walk(n[2])) return true;
+      }
+    }
+    return false;
+  };
+  if (!walk(p.tpl)) throw new Error('contact button not found');
+}
+
 function bundle(name, p) {
   return `GG.define(${JSON.stringify(name)}, ${JSON.stringify(p.tpl)}, (function () {\nconst DCLogic = GG.DCLogic;\n${fixScript(name, p.script)}\nreturn Component;\n})());\n`;
 }
@@ -142,6 +185,7 @@ writeRoute('/', pageHtml('/', light.helmet, ['/js/pages/home.js'], "GG.mountLand
 for (const [name, route] of Object.entries(ROUTES)) {
   if (route === '/' || name.startsWith('Plan')) continue;
   const p = parsePage(name);
+  if (name === 'ContactPage') fixContact(p);
   const slug = route.slice(1).replace(/\//g, '-');
   fs.writeFileSync(path.join(OUT, `js/pages/${slug}.js`), bundle(name, p));
   writeRoute(route, pageHtml(route, p.helmet, [`/js/pages/${slug}.js`], `GG.mount(${JSON.stringify(name)});`));
