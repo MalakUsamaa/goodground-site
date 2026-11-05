@@ -60,7 +60,7 @@ input::placeholder,textarea::placeholder{color:#A49F8E}
 <div style="display: flex; flex-direction: column; gap: 22px">
 <div style="display: flex; flex-direction: column; gap: 8px">
 <label for="cName" style="font-size: 15px; font-weight: 600">Your name</label>
-<input id="cName" type="text" autocomplete="name" required aria-invalid="{{nameInvalid}}" value="{{f.name}}" onChange="{{setName}}" placeholder="Malak" style="width: 100%; box-sizing: border-box; height: 56px; padding: 0 18px; border-radius: 14px; border: 1px solid {{nameBorder}}; background: var(--card); color: var(--ink); font-family: inherit; font-size: 16px; transition: border-color 0.2s ease, box-shadow 0.2s ease">
+<input id="cName" type="text" autocomplete="name" required aria-invalid="{{nameInvalid}}" value="{{f.name}}" onChange="{{setName}}" placeholder="Your full name" style="width: 100%; box-sizing: border-box; height: 56px; padding: 0 18px; border-radius: 14px; border: 1px solid {{nameBorder}}; background: var(--card); color: var(--ink); font-family: inherit; font-size: 16px; transition: border-color 0.2s ease, box-shadow 0.2s ease">
 <sc-if value="{{nameErr}}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 14px; color: var(--err)">Please enter your name.</span></sc-if>
 </div>
 <div style="display: flex; flex-direction: column; gap: 8px">
