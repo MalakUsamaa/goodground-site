@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Contact</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;family=Figtree:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FBF9F5}
+a{color:inherit}
+input:focus,textarea:focus{outline:none;border-color:#8A6A3F !important;box-shadow:0 0 0 3px rgba(138,106,63,.15)}
+input::placeholder,textarea::placeholder{color:#A49F8E}
+.gg-more svg{transition:transform .3s cubic-bezier(.2,.8,.2,1)}.gg-more:hover svg{transform:translateX(5px)}
+.gg-post img{transition:scale .7s cubic-bezier(.2,.8,.2,1)}.gg-post:hover img{scale:1.04}
+[data-theme="light"]{--ink:#2B2E1F;--ink-rgb:43, 46, 31;--oi:#F3EEE6;--oi-rgb:243, 238, 230;--deep:#1F2116;--muted:#5C5A4E;--soft:#8A8574;--muted2:#6B6858;--bronze:#8A6A3F;--bg:#FBF9F5;--bg-rgb:251, 249, 245;--bg2:#F6F2EB;--surface:#F1ECE2;--card:#FFFFFF;--glow-rgb:239, 231, 218;--oi-muted:#CFC7B5;--oi-eyebrow:#D8D0BE;--oi-hi:#E8DFC8;--err:#A3442D;--tg-rgb:43, 46, 31}[data-theme="dark"]{--ink:#F3EEE6;--ink-rgb:243, 238, 230;--oi:#1F2116;--oi-rgb:31, 33, 22;--deep:#F3EEE6;--muted:#B8B2A0;--soft:#8C8676;--muted2:#A9A290;--bronze:#C9A472;--bg:#1F2116;--bg-rgb:31, 33, 22;--bg2:#24271A;--surface:#2C2F20;--card:#26291B;--glow-rgb:52, 55, 31;--oi-muted:#5C5A4E;--oi-eyebrow:#8A6A3F;--oi-hi:#8A6A3F;--err:#E9A08C;--tg-rgb:243, 238, 230}[data-theme]{transition:background-color .3s ease,color .3s ease}
+</style>
+</helmet>
+<div data-theme="{{theme}}" style="min-height: 1700px; display: flex; flex-direction: column; font-family: 'Figtree', system-ui, sans-serif; color: var(--ink); background: var(--bg)">
+<header style="position: sticky; top: 0; z-index: 5; height: 80px; box-sizing: border-box; padding: 18px 64px; display: flex; align-items: center; gap: 16px; background: rgba(var(--bg-rgb), 0.9); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(var(--ink-rgb), 0.12)">
+<a href="LandingV2.dc.html" style="flex: 1; font-family: 'Newsreader', Georgia, serif; font-size: 30px; font-weight: 500; letter-spacing: -0.02em; text-decoration: none; color: var(--ink)">goodground</a>
+<nav aria-label="Main" style="display: flex; gap: 32px; font-size: 15px">
+<a href="ChatStart.dc.html" style="padding: 6px 0; text-decoration: none; color: var(--muted2); border-bottom: 1px solid transparent">Plan</a>
+<a href="LearnPage.dc.html" style="padding: 6px 0; text-decoration: none; color: var(--muted2); border-bottom: 1px solid transparent">Learn</a>
+<a href="BlogPage.dc.html" style="padding: 6px 0; text-decoration: none; color: var(--muted2); border-bottom: 1px solid transparent">Blog</a>
+<a href="StoryPage.dc.html" style="padding: 6px 0; text-decoration: none; color: var(--muted2); border-bottom: 1px solid transparent">Our story</a>
+</nav>
+<div style="flex: 1; display: flex; justify-content: flex-end; align-items: center; gap: 14px"><div role="group" aria-label="Colour mode" style="flex: none; display: flex; align-items: center; gap: 2px; height: 40px; box-sizing: border-box; padding: 3px; border-radius: 999px; border: 1px solid rgba(var(--tg-rgb), 0.22)"><button type="button" aria-label="Light mode" aria-pressed="{{tLight.on}}" onClick="{{tLight.pick}}" style="display: flex; align-items: center; justify-content: center; width: 38px; height: 32px; padding: 0; border: none; border-radius: 999px; background: {{tLight.bg}}; color: {{tLight.ink}}; cursor: pointer; transition: background 0.2s ease, color 0.2s ease"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="M4.9 4.9l1.4 1.4"></path><path d="M17.7 17.7l1.4 1.4"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="M4.9 19.1l1.4-1.4"></path><path d="M17.7 6.3l1.4-1.4"></path></svg></button><button type="button" aria-label="Dark mode" aria-pressed="{{tDark.on}}" onClick="{{tDark.pick}}" style="display: flex; align-items: center; justify-content: center; width: 38px; height: 32px; padding: 0; border: none; border-radius: 999px; background: {{tDark.bg}}; color: {{tDark.ink}}; cursor: pointer; transition: background 0.2s ease, color 0.2s ease"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"></path></svg></button></div>
+<a href="ChatStart.dc.html" style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 20px; border-radius: 999px; background: var(--ink); color: var(--oi); text-decoration: none; font-size: 14px; font-weight: 600">Start planning <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></a>
+</div>
+</header>
+<main style="flex: 1">
+<section style="padding: 88px 24px 96px; background: radial-gradient(60% 80% at 85% 0%, rgb(var(--glow-rgb)) 0%, rgba(var(--glow-rgb), 0) 70%), var(--bg2)">
+<div style="max-width: 1200px; margin: 0 auto; display: flex; gap: 96px; align-items: flex-start">
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 24px; padding-top: 8px">
+<p style="margin: 0; font-family: 'Inter', system-ui, sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bronze)">Contact</p>
+<h1 style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-weight: 400; font-size: 64px; line-height: 1.06">Say <em style="font-style: italic">hello</em></h1>
+<p style="margin: 0; max-width: 30rem; font-size: 19px; line-height: 1.6; color: var(--muted)">Questions, ideas, or a number that does not look right. We read every message, and we especially want to hear when we get something wrong.</p>
+<div style="display: flex; flex-direction: column; margin-top: 16px; border-top: 1px solid rgba(var(--ink-rgb), 0.12)">
+<a href="CourseBasics.dc.html" class="gg-more" style="display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid rgba(var(--ink-rgb), 0.12); text-decoration: none"><span style="display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'Newsreader', Georgia, serif; font-size: 22px">New to money planning?</span><span style="font-size: 15px; color: var(--muted)">Start with the free Money basics course</span></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></a>
+<a href="ChatStart.dc.html" class="gg-more" style="display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid rgba(var(--ink-rgb), 0.12); text-decoration: none"><span style="display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'Newsreader', Georgia, serif; font-size: 22px">Want a plan right now?</span><span style="font-size: 15px; color: var(--muted)">Pick a goal and get one in two minutes</span></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></a>
+</div>
+<p style="margin: 8px 0 0; font-size: 14px; line-height: 1.6; color: var(--soft)">We cannot give personal financial advice or look into your bank account. For a problem with a bank, contact the bank first, then Sanadak, the Central Bank's complaints service.</p>
+</div>
+
+<div style="flex: none; width: 560px; box-sizing: border-box; padding: 44px; border-radius: 24px; background: var(--bg); border: 1px solid rgba(var(--ink-rgb), 0.12); box-shadow: 0 24px 60px rgba(var(--ink-rgb), 0.08)">
+<sc-if value="{{sent}}" hint-placeholder-val="{{ false }}">
+<div role="status" style="display: flex; flex-direction: column; gap: 16px; padding: 24px 0">
+<span style="width: 56px; height: 56px; border-radius: 50%; background: var(--surface); color: var(--bronze); display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M5 12l5 5L20 7"></path></svg></span>
+<h2 style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-weight: 400; font-size: 36px">Thank you{{thanksName}}</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.6; color: var(--muted)">Your message is on its way. We will reply to {{sentEmail}}. We only use your email to answer you.</p>
+<button type="button" onClick="{{again}}" style="align-self: flex-start; margin-top: 8px; height: 48px; padding: 0 22px; border-radius: 999px; border: 1px solid rgba(var(--ink-rgb), 0.25); background: transparent; color: var(--ink); font-family: inherit; font-size: 15px; font-weight: 500; cursor: pointer">Send another message</button>
+</div>
+</sc-if>
+<sc-if value="{{notSent}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="cName" style="font-size: 15px; font-weight: 600">Your name <span style="font-weight: 400; color: var(--soft)">(optional)</span></label>
+<input id="cName" type="text" autocomplete="name" value="{{f.name}}" onChange="{{setName}}" placeholder="Malak" style="width: 100%; box-sizing: border-box; height: 56px; padding: 0 18px; border-radius: 14px; border: 1px solid rgba(var(--ink-rgb), 0.2); background: var(--card); color: var(--ink); font-family: inherit; font-size: 16px; transition: border-color 0.2s ease, box-shadow 0.2s ease">
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="cEmail" style="font-size: 15px; font-weight: 600">Email</label>
+<input id="cEmail" type="email" autocomplete="email" value="{{f.email}}" onChange="{{setEmail}}" placeholder="you@email.com" aria-invalid="{{emailInvalid}}" style="width: 100%; box-sizing: border-box; height: 56px; padding: 0 18px; border-radius: 14px; border: 1px solid rgba(var(--ink-rgb), 0.2); background: var(--card); color: var(--ink); font-family: inherit; font-size: 16px; transition: border-color 0.2s ease, box-shadow 0.2s ease; border-color: {{emailBorder}}">
+<sc-if value="{{emailErr}}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 14px; color: var(--err)">Please enter a valid email so we can reply.</span></sc-if>
+</div>
+<div role="radiogroup" aria-label="What is it about?" style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 15px; font-weight: 600">What is it about?</span>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{topics}}" as="t" hint-placeholder-count="5">
+<button type="button" role="radio" aria-checked="{{t.checked}}" onClick="{{t.pick}}" style="height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid {{t.border}}; background: {{t.bg}}; color: {{t.ink}}; font-family: inherit; font-size: 14px; font-weight: 500; cursor: pointer; transition: background 0.2s ease, color 0.2s ease">{{t.label}}</button>
+</sc-for>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="cMsg" style="font-size: 15px; font-weight: 600">Message</label>
+<textarea id="cMsg" rows="6" value="{{f.message}}" onChange="{{setMessage}}" placeholder="Tell us what is on your mind" style="width: 100%; box-sizing: border-box; padding: 16px 18px; border-radius: 14px; border: 1px solid {{msgBorder}}; background: var(--card); color: var(--ink); font-family: inherit; font-size: 16px; line-height: 1.5; resize: vertical"></textarea>
+<sc-if value="{{msgErr}}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 14px; color: var(--err)">Please write a short message.</span></sc-if>
+</div>
+<button type="button" onClick="{{send}}" style="height: 56px; border: none; border-radius: 999px; background: var(--ink); color: var(--oi); font-family: inherit; font-size: 16px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px">Send message <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></button>
+<p style="margin: 0; font-size: 13px; line-height: 1.5; color: var(--soft)">We only use your email to reply. Please do not include card numbers, passwords or your Emirates ID.</p>
+</div>
+</sc-if>
+</div>
+</div>
+</section>
+</main>
+<footer style="position: relative; height: 621px; box-sizing: border-box; padding: 92px 24px 24px; background: radial-gradient(70% 90% at 60% 40%, #4A4E33 0%, rgba(74, 78, 51, 0) 70%), #373A24; color: #F3EEE6; overflow: hidden">
+<div style="max-width: 1200px; margin: 0 auto; display: flex; gap: 48px">
+<div style="width: 284px; flex: none; display: flex; flex-direction: column; gap: 16px">
+<p style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 32px; font-weight: 500; letter-spacing: -0.02em">goodground</p>
+<p style="margin: 0; font-size: 16px; line-height: 20px; color: #D8D2C2">A clearer way to understand your money, plan ahead and make your next move</p>
+<div style="display: flex; gap: 16px">
+<a href="https://www.instagram.com/goodground.cc/" target="_blank" rel="noopener noreferrer" onClick="{{igOpen}}" aria-label="goodground on Instagram" style="width: 24px; height: 24px; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="currentColor"></circle></svg></a>
+<a href="https://www.linkedin.com/company/goodground-cc/" target="_blank" rel="noopener noreferrer" onClick="{{liOpen}}" aria-label="goodground on LinkedIn" style="width: 24px; height: 24px; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 9h4v12H4zM6 3a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM10 9h4v1.7C14.6 9.7 15.8 9 17.5 9 20.4 9 21 10.9 21 13.5V21h-4v-6.6c0-1.6-.3-2.6-1.8-2.6s-1.2 1.1-1.2 2.6V21h-4z"></path></svg></a>
+</div>
+</div>
+<div style="display: flex; gap: 32px">
+<nav aria-label="Plan" style="width: 183px; display: flex; flex-direction: column; gap: 32px"><h2 style="margin: 0; font-size: 24px; line-height: 32px; font-weight: 500">Plan</h2><a href="ChatHome.dc.html" style="font-size: 16px; line-height: 14px; color: #BDB7A5; text-decoration: none">Buy a home</a><a href="ChatSavings.dc.html" style="font-size: 16px; line-height: 14px; color: #BDB7A5; text-decoration: none">Build savings</a><a href="ChatDebt.dc.html" style="font-size: 16px; line-height: 14px; color: #BDB7A5; text-decoration: none">Clear debt</a><a href="ChatGrow.dc.html" style="font-size: 16px; line-height: 14px; color: #BDB7A5; text-decoration: none">Grow money</a></nav>
+<nav aria-label="Learn" style="width: 184px; display: flex; flex-direction: column; gap: 32px"><h2 style="margin: 0; font-size: 24px; line-height: 32px; font-weight: 500"><a href="LearnPage.dc.html" style="text-decoration: none">Learn</a></h2><a href="CourseSaving.dc.html" style="font-size: 16px; line-height: 14px; color: #BDB7A5; text-decoration: none">Saving</a><a href="CourseDebt.dc.html" style="font-size: 16px; line-height: 14px; color: #BDB7A5; text-decoration: none">Managing debt</a><a href="CourseInvesting.dc.html" style="font-size: 16px; line-height: 14px; color: #BDB7A5; text-decoration: none">Investing</a><a href="CourseBasics.dc.html" style="font-size: 16px; line-height: 14px; color: #BDB7A5; text-decoration: none">Money basics</a></nav>
+<nav aria-label="On your side" style="width: 183px; display: flex; flex-direction: column; gap: 32px"><h2 style="margin: 0; font-size: 24px; line-height: 32px; font-weight: 500">On your side</h2><a href="StoryPage.dc.html" style="font-size: 16px; line-height: 14px; color: #BDB7A5; text-decoration: none">The story</a><a href="PromisePage.dc.html" style="font-size: 16px; line-height: 14px; color: #BDB7A5; text-decoration: none">Our promise</a><a href="BlogPage.dc.html" style="font-size: 16px; line-height: 14px; color: #BDB7A5; text-decoration: none">Blog</a><a href="ContactPage.dc.html" style="font-size: 16px; line-height: 14px; color: #BDB7A5; text-decoration: none">Contact</a></nav>
+</div>
+</div>
+<div style="max-width: 1200px; margin: 56px auto 0; padding-top: 24px; border-top: 1px solid rgba(243, 238, 230, 0.12); display: flex; gap: 48px; align-items: flex-start; color: #A9A290">
+<p style="flex: 1; margin: 0; font-size: 12.5px; line-height: 1.65">goodground provides general information and planning tools for educational purposes only. It is not financial, investment, mortgage, legal or tax advice, and goodground is not licensed or regulated by the Central Bank of the UAE, the Capital Market Authority, the DFSA or the FSRA. Results are estimates based on what you enter and on general assumptions that may not fit your situation. Rules, rates and fees change. Please check with your bank or a licensed adviser before making any financial decision. goodground accepts no liability for decisions made using this site.</p>
+<div style="flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; font-size: 13px">
+<a href="LegalPage.dc.html" style="color: #D8D0BE; text-decoration: underline; text-underline-offset: 3px">Terms and disclaimer</a>
+<a href="LegalPage.dc.html" style="color: #D8D0BE; text-decoration: underline; text-underline-offset: 3px">Privacy</a>
+<span>© 2026 goodground</span>
+</div>
+</div>
+<div aria-hidden="true" style="position: absolute; left: 0; right: 0; top: 545px; overflow: hidden; white-space: nowrap; pointer-events: none">
+<div ref="{{marquee}}" style="display: inline-flex; will-change: transform; font-family: 'Newsreader', Georgia, serif; font-style: italic; font-weight: 600; font-size: 70px; line-height: 120px; color: rgba(255, 255, 255, 0.25)">
+<span style="padding-right: 40px">Independent.&nbsp;&nbsp;Private.&nbsp;&nbsp;Always on your side.&nbsp;&nbsp;Independent.&nbsp;&nbsp;Private.&nbsp;&nbsp;Always on your side.</span>
+<span style="padding-right: 40px">Independent.&nbsp;&nbsp;Private.&nbsp;&nbsp;Always on your side.&nbsp;&nbsp;Independent.&nbsp;&nbsp;Private.&nbsp;&nbsp;Always on your side.</span>
+</div>
+</div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1700}}'>
+class Component extends DCLogic {
+themeNow() {
+if (this.__theme) return this.__theme;
+let stored = null;
+try { stored = window.localStorage.getItem('gg-theme'); } catch (e) {}
+const sys = (typeof matchMedia === 'function' && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+this.__theme = stored === 'dark' || stored === 'light' ? stored : sys;
+if (!stored && !this.__themeWatch && typeof matchMedia === 'function') {
+const mq = matchMedia('(prefers-color-scheme: dark)');
+this.__themeWatch = (e) => { let s2 = null; try { s2 = window.localStorage.getItem('gg-theme'); } catch (err) {} if (!s2) { this.__theme = e.matches ? 'dark' : 'light'; this.forceUpdate(); } };
+try { mq.addEventListener('change', this.__themeWatch); } catch (e) {}
+}
+return this.__theme;
+}
+setTheme(t) {
+this.__theme = t;
+try { window.localStorage.setItem('gg-theme', t); } catch (e) {}
+this.forceUpdate();
+}
+themeVals(onBg, onInk, offInk) {
+const t = this.themeNow();
+const mk = (id) => ({ on: t === id ? 'true' : 'false', bg: t === id ? onBg : 'transparent', ink: t === id ? onInk : offInk, pick: () => this.setTheme(id) });
+return { theme: t, tLight: mk('light'), tDark: mk('dark'), liOpen: (e) => { try { e.preventDefault(); } catch (x) {} const u = 'https://www.linkedin.com/company/goodground-cc/'; let w = null; try { w = window.open(u, '_blank'); } catch (x) {} if (w) { try { w.opener = null; } catch (x) {} } else { try { window.parent.postMessage({ __om_link: u }, '*'); } catch (x) {} } }, igOpen: (e) => { try { e.preventDefault(); } catch (x) {} const u = 'https://www.instagram.com/goodground.cc/'; let w = null; try { w = window.open(u, '_blank'); } catch (x) {} if (w) { try { w.opener = null; } catch (x) {} } else { try { window.parent.postMessage({ __om_link: u }, '*'); } catch (x) {} } } };
+}
+
+constructor(props) {
+super(props);
+this.marquee = (el) => { if (!el || el.__ggLoop || typeof el.animate !== 'function') return;
+el.__ggLoop = el.animate([{ transform: 'translate3d(0, 0, 0)' }, { transform: 'translate3d(-50%, 0, 0)' }], { duration: 50000, iterations: Infinity, easing: 'linear' }); };
+this.state = { name: '', email: '', topic: 'question', message: '', tried: false, sent: false };
+}
+renderVals() {
+const s = this.state;
+const okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(s.email).trim());
+const okMsg = String(s.message).trim().length >= 2;
+const topics = [['question', 'A question'], ['feedback', 'Feedback'], ['mistake', 'Something looks wrong'], ['partner', 'Partnerships'], ['press', 'Press']];
+return Object.assign(this.themeVals('var(--ink)', 'var(--oi)', 'var(--muted)'), {
+marquee: this.marquee,
+f: { name: s.name, email: s.email, message: s.message },
+setName: (e) => this.setState({ name: e.target.value }),
+setEmail: (e) => this.setState({ email: e.target.value }),
+setMessage: (e) => this.setState({ message: e.target.value }),
+topics: topics.map(([id, label]) => { const on = s.topic === id; return { label: label, checked: on ? 'true' : 'false', bg: on ? 'var(--ink)' : 'transparent', ink: on ? 'var(--oi)' : 'var(--ink)', border: on ? 'var(--ink)' : 'rgba(var(--ink-rgb), 0.2)', pick: () => this.setState({ topic: id }) }; }),
+emailErr: s.tried && !okEmail,
+emailInvalid: s.tried && !okEmail ? 'true' : 'false',
+emailBorder: s.tried && !okEmail ? 'var(--err)' : 'rgba(var(--ink-rgb), 0.2)',
+msgErr: s.tried && !okMsg,
+msgBorder: s.tried && !okMsg ? 'var(--err)' : 'rgba(var(--ink-rgb), 0.2)',
+send: () => { if (okEmail && okMsg) this.setState({ sent: true }); else this.setState({ tried: true }); },
+sent: s.sent,
+notSent: !s.sent,
+thanksName: s.name.trim() ? ', ' + s.name.trim().split(' ')[0] : '',
+sentEmail: String(s.email).trim(),
+again: () => this.setState({ name: '', email: '', topic: 'question', message: '', tried: false, sent: false })
+});
+}
+}
+</script>
+</body>
+</html>
